@@ -1,5 +1,9 @@
 body {
-  background: white;
+  background: #fff;
+  width: 100vw;
+}
+* {
+  max-width: 100%;
 }
 
 /* App.js */
@@ -7,6 +11,7 @@ body {
   display: flex;
   justify-content: center;
   transition: 0.5s ease;
+  margin: 0 auto;
 }
 
 .app.show-success-message {
@@ -89,7 +94,7 @@ header input {
   display: none;
 }
 header .menu {
-  position: absolute;
+  position: fixed;
   top: 30px;
   right: 30px;
   z-index: 10001;
@@ -126,7 +131,7 @@ header input#menu:checked ~ label.menu span:nth-of-type(3) {
   transform: translateY(-7px) rotate(-45deg);
 }
 header nav {
-  position: absolute;
+  position: fixed;
   top: 30px;
   right: 30px;
   z-index: 10000;
@@ -138,10 +143,10 @@ header nav {
   overflow: hidden;
 }
 header #menu:checked ~ nav {
-  position: absolute;
+  position: fixed;
   top: 0px;
   right: 0px;
-  width: 487px;
+  width: 100%;
   height: 100vh;
   border-radius: 0px;
   transition: ease .4s;

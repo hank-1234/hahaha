@@ -5,6 +5,7 @@ import Gallery from './Gallery/Gallery';
 
 const Main = ({ username, onLogout }) => {
   const [start, setStart] = useState(false);
+  
 
   const handleClick = () =>{
     setTimeout(() => {
@@ -15,7 +16,7 @@ const Main = ({ username, onLogout }) => {
   return (
     <div className="main-container" onClick={handleClick}>
       {start ? (
-        <Gallery></Gallery>
+        <Gallery onLogout={onLogout}></Gallery>
       ) : (
         <StartScreen></StartScreen>
       )}

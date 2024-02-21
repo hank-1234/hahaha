@@ -9,11 +9,51 @@ function App() {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    // 檢查 localStorage 中是否有登入標記
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     // 初始時先不登入
     setLoggedIn(false);
+    // 檢查 localStorage 中是否有登入標記
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     setLoggedIn(isLoggedIn);
+
+    // 設定最後一次活動時間戳到 localStorage
+    const setLastActivity = () => {
+      localStorage.setItem('lastActivity', Date.now().toString());
+    };
+
+    // 處理瀏覽器關閉事件
+    const handleBeforeUnload = (event) => {
+      setLastActivity();
+    };
+
+    // 綁定事件
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // 初始化最後一次活動時間戳
+    setLastActivity();
+
+    // 定時檢查時間差，如果超過 5 分鐘，執行登出操作
+    const checkLogout = () => {
+      const lastActivity = localStorage.getItem('lastActivity');
+      if (lastActivity) {
+        const currentTime = Date.now();
+        const timeDifference = currentTime - parseInt(lastActivity, 10);
+        const fiveMinutes = 5 * 60 * 1000; // 5 分鐘的毫秒數
+
+        if (timeDifference > fiveMinutes) {
+          // 執行登出操作，例如觸發登出函數
+          console.log('Auto logout after 5 minutes of inactivity');
+        }
+      }
+    };
+
+    // 設定定時器，每分鐘檢查一次
+    const intervalId = setInterval(checkLogout, 60 * 1000);
+
+    // 在 component 卸載時，清理事件和定時器
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      clearInterval(intervalId);
+    };
   }, []);
 
   const handleLogin = (username) => {

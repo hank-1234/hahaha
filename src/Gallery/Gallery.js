@@ -1,7 +1,7 @@
 import React,{ useEffect } from "react";
 import "./style.css";
 
-function Gallery(onLogout){
+function Gallery({onLogout}){
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,7 +26,7 @@ function Gallery(onLogout){
           </label>
           <nav>
             <ul className="main">
-              <li style={{height: "400px", margin: "200px 0 0 0", width: "426px", color: "#fff"}}>
+              <li style={{height: "400px", width: "80%", color: "#fff"}}>
                 思樺情人節快樂，謝謝妳陪著我，努力和我磨合，和我溝通，甚至有時候低下頭，談這場戀愛，任性的部分嗎?那也是妳，也是我喜歡的妳。至今妳對我的付出，為我的改變，謝謝妳，我知道不是理所當然的喔。我愛妳喔，我的寶貝、寶寶、我的女孩，還有最可愛的小胖子。
               </li>
               <li>
